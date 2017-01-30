@@ -1,11 +1,21 @@
-'use strict'
-var express = require('express')
-var app =  express()
+"use strict"
+//dependencies
+const express = require('express')
+let app = express()
+var bodyParser = require('body-parser');
 
-app.get('/', function(req, res){
-  res.send('Berhasil')
-})
+const routes = require('./routes/index')
+const api = require('./routes/api')
 
-app.listen(3000, function() {
-  console.log('Server is Running');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//connecting routes
+app.use('/', routes)
+app.use('/api', api)
+
+
+//server
+app.listen(3000, function(){
+  console.log('Server Is Running');
 })

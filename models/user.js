@@ -8,6 +8,15 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+      },
+      listUser: function(){
+        user.findAll().then(function(data){
+          let result = []
+          data.forEach(function(datas){
+            result.push(datas.dataValues)
+          })
+          return result
+        })
       }
     }
   });
