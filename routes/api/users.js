@@ -1,38 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const models = require('../models');
-var user = models.User;
+const controller = require('../../controller/users-controller.js');
 
-router.get('/', function(req, res) {
-  user.findAll().then(function(result){
-    res.render('index', {result: result, title: "User List"})
-  })
-});
+router.get('/api/users', getAllUsers(req,res));
 
-router.post('/create', function(req, res) {
-  user.create({firstname: req.body.firstname, lastname: req.body.lastname, phone: req.body.phone, createdAt: new Date(), updatedAt: new Date()}).then(function(result){
-    res.redirect('/')
-  })
-});
+router.get('api/users/:id', getSingleUser(req,res));
 
-router.get('/delete/:id',function(req,res){
-  user.findById(req.params.id).then(function(use){
-    use.destroy()
-    res.redirect('/')
-    })
-});
+router.post('/api/users', createUser(req,res));
 
-router.get('/update/:id',function(req,res){
-  user.findById(req.params.id).then(function(use){
-    res.render('update',{list:use})
-    })
-});
+router.delete('api/users/:id', deleteUser(req,res));
 
-router.post('/updated',function(req,res){
-  user.findById(req.body.id).then(function(use){
-    use.update({firstname:req.body.firstname,lastname:req.body.lastname,phone:req.body.phone,updatedAt: new Date()})
-    res.redirect('/')
-    })
-});
+router.put('api/users/:id', updateUser(req,res));
 
 module.exports = router;
