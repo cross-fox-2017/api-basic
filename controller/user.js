@@ -20,10 +20,13 @@ module.exports = {
         })
     },
     delete: function(req, res, next) {
+        var tampilData
         models.User.findById(req.params.id).then(function(data) {
+            tampilData = data
             data.destroy()
         }).then(function() {
-            res.send("Data Terhapus")
+            res.send(tampilData)
+            // res.send("Data Terhapus")
         })
     },
     updateData: function(req, res, next) {
@@ -31,7 +34,7 @@ module.exports = {
             data.update({
                 user: req.body.user,
                 password: req.body.user
-            }).then(function(showData){
+            }).then(function(showData) {
                 res.send(showData)
             })
         })
