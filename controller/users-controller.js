@@ -1,5 +1,6 @@
 const models = require('../models');
 var user = models.User;
+const hash = require('password-hash');
 
 module.exports = {
     getAllUsers : function(req, res) {
@@ -11,18 +12,22 @@ module.exports = {
         res.send({users: data})
       })
   }, createUser : function(req, res) {
-    console.log(req.body);
-      user.create({username: req.body.username, password: req.body.password, createdAt: new Date(), updatedAt: new Date()}).then(function(data){
+      user.create({username: req.body.username, password: hash.generate(req.body.password), createdAt: new Date(), updatedAt: new Date()}).then(function(data){
         res.send({users: data})
       })
   }, deleteUser : function(req,res){
       user.findById(req.params.id).then(function(data){
-        use.destroy()
+        data.destroy()
         res.send({users:data})
       })
   }, updateUser : function(req,res){
-      user.findById(req.body.id).then(function(data){
-        use.update({username:req.body.username,password:req.body.password,updatedAt: new Date()})
+      user.findById(req.params.id).then(function(data){
+        console.log(data);
+        data.update({username:req.body.username,password:hash.generate(req.body.password),updatedAt: new Date()})
+        res.send({users: data})
+      })
+  }, signup : function (req,res) {
+      user.create({username: req.body.username, password: hash.generate(req.body.password), createdAt: new Date(), updatedAt: new Date()}).then(function(data){
         res.send({users: data})
       })
   }
