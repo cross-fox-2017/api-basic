@@ -36,6 +36,7 @@ module.exports = {
         data.update({
           username: req.body.username,
           password: hash.generate(req.body.password),
+          updateAt: new Date()
         })
       }).then(function(){
       res.send('data has been updated')
