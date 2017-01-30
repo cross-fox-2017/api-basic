@@ -33,7 +33,7 @@ module.exports = {
         models.User.findById(req.params.id).then(function(data) {
             data.update({
                 user: req.body.user,
-                password: req.body.user
+                password: req.body.password
             }).then(function(showData) {
                 res.send(showData)
             })
