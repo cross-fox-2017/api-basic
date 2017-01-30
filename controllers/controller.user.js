@@ -23,8 +23,8 @@ var users = {
   /* delete one user */
   deleteOneUser : function(req, res, next){
     models.User.findById(req.params.id).then(function(data) {
-      data.destroy()
-      res.json("data terhapus")
+      data.destroy();
+      res.json("data dengan id : " + data.id + " berhasil di hapus");
     })
   },
   /* edit one user */
