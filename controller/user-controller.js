@@ -1,5 +1,6 @@
 let model      = require ('../models')
 let user       = model.User;
+const hash     = require('password-hash');
 
 module.exports = {
 
@@ -19,11 +20,29 @@ module.exports = {
 
     // CREATE user
     createUser : function(req,res,next){
-      user.create({username: req.body.username, password: req.body.password, createdAt: new Date(), updatedAt: new Date()})
+      user.create({username: req.body.username, password: hash.generate(req.body.password), createdAt: new Date(), updatedAt: new Date()})
       .then(function(data){
         res.send(data)
       })
-    }
+    },
 
+    //UPDATE
+    updateUser : function(req,res){
+      user.findById(req.params.id).then(function (data){
+        data.update({username: req.body.username, password: hash.generate(req.body.password), updatedAt: new Date()})
+        res.send(data)
+        })
+    },
+
+    //DELETE
+    deleteUser : function(req,res){
+        user.findById(req.params.id)
+        .then(function(data){
+            data.destroy()
+            .then(function(){
+                res.send('data has been deleted')
+            })
+          })
+    }
 
 }
