@@ -43,6 +43,8 @@ let userController = {
         name: name,
         email: email,
         address: address
+      }).then(function(user){
+        res.json(user)
       })
     })
   }
