@@ -5,7 +5,7 @@ module.exports = {
   createUser: function(req, res, next) {
     models.Users.create({
       username: req.body.username,
-      password: req.body.password
+      password: passwordHash.generate(req.body.password)
     }).then((data) => {
       res.send(data)
     })
@@ -40,3 +40,5 @@ module.exports = {
     })
   }
 };
+
+// passwordHash.verify(req.body.password, data.password)

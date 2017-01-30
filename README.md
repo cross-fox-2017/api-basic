@@ -1,4 +1,8 @@
-# api-basic
+# API Basic
+
+Demo app with basic REST API
+
+List of user routes:
 
 | Route         | HTTP  | Description
 |-------------- |:------|-------------
