@@ -20,3 +20,5 @@ API
 1. npm install
 2. npm start
 ```
+
+Access the website via http://localhost:3000 or API localhost:3000/api/users
