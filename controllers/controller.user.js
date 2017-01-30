@@ -33,7 +33,9 @@ var users = {
 
     models.User.update({ username: req.body.username, password: req.body.password },{ where: { id: req.params.id } })
     .then(function(data){
-      res.json(data)
+      return models.User.findById(req.params.id);
+    }).then(function(dataUser){
+      res.json(dataUser)
     }).catch(function(err){
       res.json(err)
     });
