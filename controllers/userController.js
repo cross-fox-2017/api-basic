@@ -4,29 +4,61 @@ const model = require('../models')
 module.exports = {
 
     getAllUser : function(req, res) {
-
-        // req.query.username
-
-        res.send("People index page test");
+        model.User.findAll().then(function(result){
+              res.send(result);
+        })
     },
-
 
     getSingleUser : function(req, res) {
-        res.send("People index page post method test");
-    },
 
+      model.User.findById(req.params.id).then(function(result){
+            res.send(result);
+      })
+    },
 
     create_user : function(req, res) {
-        res.send("People finest subsection test");
+
+    let username =  req.body.username
+    let password =    req.body.password
+    let email =   req.body.email
+      model.User.create({
+
+          username: username,
+          password: password,
+          email: email
+      }).then(function(result){
+          if(result){
+                res.send('created')
+            }
+            else {
+              res.send('Something Wrong !')
+            }
+      })
+
+    },
+
+    delete_user : function(req, res) {
+
+      model.User.destroy({
+          where : {
+              id : req.params.id
+          }
+          }).then(function(user){
+
+            res.send({message: `User with id: ${req.params.id} is deleted`})
+      })
+
     },
 
 
-    delete_user : function(req, res, id) {
-        res.send("You are requesting the resource with id: " + id);
-    },
+    update_user : function(req, res) {
+      model.User.findById(req.params.id).then(function(user){
+            user.update({
+              email : req.body.email
+            })
+              res.send({message: `User with id: ${req.params.id}. are change the email ! `})
+      })
 
 
-    update_user : function(req, res, id) {
-        res.send("You are requesting the friends of the person with id: " + id);
     }
 }
