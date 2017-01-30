@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 const controller = require('../../controller/users-controller.js');
 
-router.get('/api/users', getAllUsers(req,res));
+router.get('/users', controller.getAllUsers);
 
-router.get('api/users/:id', getSingleUser(req,res));
+router.get('/users/:id', controller.getSingleUser);
 
-router.post('/api/users', createUser(req,res));
+router.post('/users/', controller.createUser);
 
-router.delete('api/users/:id', deleteUser(req,res));
+router.delete('/users/:id', controller.deleteUser);
 
-router.put('api/users/:id', updateUser(req,res));
+router.put('/users/:id', controller.updateUser);
 
 module.exports = router;
