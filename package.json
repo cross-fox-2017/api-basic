@@ -1,0 +1,19 @@
+{
+  "name": "api-basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didietsuryadi/api-basic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/didietsuryadi/api-basic/issues"
+  },
+  "homepage": "https://github.com/didietsuryadi/api-basic#readme"
+}
